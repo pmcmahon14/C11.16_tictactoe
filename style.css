@@ -1,0 +1,42 @@
+.cell{
+    width:20vw;
+    height:30vh;
+    border:2px solid black;
+    display:inline-block;
+    margin: 1vw 1vw;
+    background-color:lightblue;
+}
+
+.row{
+    width:60vw;
+    height: 30vh;
+    display:flex;
+    justify-content:space-between;
+    margin:2vw auto;
+
+}
+
+.game_board{
+    width:100%;
+    height:100%;
+}
+
+.bottom{
+    margin: 0 auto;
+}
+
+button .threeXthree{
+
+}
+
+button .fiveXfive{
+
+}
+
+button .reset{
+
+}
+
+body{
+    background-color:black;
+}

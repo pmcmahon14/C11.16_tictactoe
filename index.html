@@ -6,6 +6,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tic Tac Toe</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
 <div class="top">
@@ -13,12 +16,27 @@
     <div class="player2"></div>
 </div>
 <div class="game_board">
-    <div class="cell"></div>
+    <div class="row">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+    </div>
+    <div class="row">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+    </div>
+    <div class="row">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+    </div>
 </div>
 <div class="bottom">
-    <button type="button" class="threeXthree"></button>
-    <button type="button" class="fiveXfive"></button>
-    <button type="button" class="reset"></button>
+
+    <button type="button" class="threeXthree">3x3</button>
+    <button type="button" class="fiveXfive">5x5</button>
+    <button type="button" class="reset">Reset</button>
 </div>
 </body>
 </html>
