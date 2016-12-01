@@ -6,15 +6,28 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tic Tac Toe</title>
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="game.js"></script>
 
 </head>
 <body>
+<div id="content">
 <div class="top">
-    <div class="player1"></div>
-    <div class="player2"></div>
+    <div class="player1"><p>PLAYER 1</p></div>
+
+    <div class="time_bar"> <!--Start of the time bar-->
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"                             style="width:0%">
+            </div>
+        </div>
+    </div> <!--End of the time bar-->
+
+    <div class="player2"><p>PLAYER 2</p></div>
 </div>
 <div class="game_board">
     <div class="row">
@@ -34,10 +47,13 @@
     </div>
 </div>
 <div class="bottom">
-
-    <button type="button" class="threeXthree">3x3</button>
-    <button type="button" class="fiveXfive">5x5</button>
-    <button type="button" class="reset">Reset</button>
+    <div class="button_wrapper">
+        <button class="threeXthree">3&times3</button>
+        <button class="fiveXfive">5&times5</button>
+        <button class="reset">RESET</button>
+    </div>
 </div>
+
+</div> <!--end of div content -->
 </body>
 </html>

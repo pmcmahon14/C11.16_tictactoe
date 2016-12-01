@@ -3,8 +3,8 @@
  */
 var cellState = {
     stateDefault:"stateDefault",
-    stateX:"stateX",
-    stateO:"stateO"
+    stateX:"X",
+    stateO:"O"
 };
 var game = null;
 $(document).ready(setupGame);
@@ -110,6 +110,7 @@ function Cell(cellID,cellElement) {
         }
         //TODO:set cell element based on state
         $(mCellElement).text(mState);
+        //$(mCellElement).addClass(xCell);
     };
 
     this.getCellID = function () {
