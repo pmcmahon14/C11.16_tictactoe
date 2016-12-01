@@ -69,6 +69,7 @@ function Game() {
         mPlayers.push(player1,player2);
 
         $(".cell").click(handleCellClick);
+        $(".cell5x5").click(handleCellClick);
     };
 
     this.getGameBoard = function () {
@@ -172,6 +173,7 @@ function Game() {
         if (mMoves == mSize*mSize - 1) {
             console.log("No Winner");
             $(".modal-title").text("No Winner");
+            $('#modalWin').modal('show');
             finishGame();
         }
 
@@ -184,6 +186,7 @@ function Game() {
             playerone = playerone + 1;
             document.querySelector('.wincount1').innerHTML = playerone;
             $(".modal-title").text("Player 1 Wins");
+            $('#modalWin').modal('show');
             finishGame();
             return true;
         } else if (matchY == mSize) {
@@ -191,6 +194,7 @@ function Game() {
             playertwo = playertwo + 1;
             document.querySelector('.wincount2').innerHTML = playertwo;
             $(".modal-title").text("Player 2 Wins");
+            $('#modalWin').modal('show');
             finishGame();
             return true;
         }
@@ -201,7 +205,6 @@ function Game() {
         $('.player2').removeClass('highlightCurrentPlayer');
         clearTimer();
         self.inPlay = false;
-        $('#modalWin').modal('show');
     }
 
     this.startGame = function () {
@@ -253,7 +256,7 @@ function Game() {
     };
 
     this.newGame = function(size) {
-        clearTimer();
+        finishGame();
         self.clearBoard = true;
         $(".row").detach();
         $(".row5x5").detach();
