@@ -24,6 +24,7 @@ function setupGame() {
 }
 
 function handleCellClick() {
+    if (!game.inPlay) return;
     var cell = game.getGameBoard().getCell(this);
     if (cell.getState() === cellState.stateDefault) {
         var player = game.getCurrentPlayer();
@@ -41,21 +42,27 @@ function Game() {
     var mSize = 0;
     var mMoves = 0;
     var self = this;
+    this.inPlay = false;
+    var timer = null;
+    var startTime;
+    var timerCount = 0;
+    var progressBar = $(".progress-bar");
 
     this.initGame = function (size) {
         //create game board
         mPlayers = [];
-        setPlayer(0);
         mSize = size;
         mMoves = 0;
         mGameBoard = new GameBoard();
         mGameBoard.initGameBoard(size,size);
+        self.inPlay = false;
 
         //create players
         var player1 = new Player(0,cellState.stateX);
         var player2 = new Player(1,cellState.stateO);
 
         mPlayers.push(player1,player2);
+        setPlayer(0);
 
         $(".cell").click(handleCellClick);
     };
@@ -155,17 +162,59 @@ function Game() {
             console.log("No Winner");
         }
 
+        resetTimer();
     };
-
 
     function doWin(matchX,matchY) {
         if (matchX == mSize) {
             console.log("Player 1 wins");
+            clearTimer();
+            self.inPlay = false;
             return true;
         } else if (matchY == mSize) {
             console.log("Player 2 wins");
+            clearTimer();
+            self.inPlay = false;
             return true;
         }
+    }
+
+    this.startGame = function () {
+        self.inPlay = true;
+        startTimer();
+    };
+
+    function startTimer() {
+        startTime = Date.now();
+        timer = setTimeout(updateProgress,100);
+    }
+
+    function resetTimer() {
+        startTime = Date.now();
+        progressBar.css("width","0%");
+        timerCount = 0;
+        //console.log("resetting timer");
+    }
+
+    function updateProgress() {
+        if (timerCount == 50) {
+            resetTimer();
+            self.switchPlayer();
+        } else {
+            timerCount++;
+            var percent = Math.floor(((Date.now() - startTime) / 5000) * 100);
+            progressBar.css("width",percent+"%");
+        }
+
+        timer = setTimeout(updateProgress,100);
+        //console.log("progress count " + timerCount);
+    }
+
+    function clearTimer() {
+        timerCount = 0;
+        clearTimeout(timer);
+        timer = null;
+        progressBar.css("width","0%");
     }
 
     this.resetGame = function () {
@@ -175,6 +224,7 @@ function Game() {
     };
 
     this.newGame = function(size) {
+        clearTimer();
         $(".row").detach();
         game.initGame(size);
     }
@@ -278,5 +328,4 @@ function Cell(cellID) {
 function Player(id,symbol) {
     this.playerID = id;
     this.symbol = symbol;
-    this.score = 0;
 }
