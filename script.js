@@ -1,14 +1,14 @@
 $(document).ready(function(){
 
-var symbol = ["X", "O"];
+    var symbol = ["X", "O"];
 
-function Player(id, symbol){
-    this.id = id;
-    this.symbol = symbol;
-}
+    function Player(id, symbol){
+        this.id = id;
+        this.symbol = symbol;
+    }
 
-var player1 = new Player();
-var player2 = new Player();
+    var player1 = new Player();
+    var player2 = new Player();
 
 
 
@@ -46,4 +46,3 @@ var player2 = new Player();
     });
 
 });
-
