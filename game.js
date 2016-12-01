@@ -28,10 +28,8 @@ function handleCellClick() {
     if (cell.getState() === cellState.stateDefault) {
         var player = game.getCurrentPlayer();
         cell.setState(player.symbol);
-        player.score += cell.getCellID();
         game.switchPlayer();
-
-        //console.log(game.checkWin());
+        game.checkWin(cell);
     }
     //console.log("clicked");
 }
@@ -41,6 +39,7 @@ function Game() {
     var mPlayers = [];
     var mCurrentPlayer = 0;
     var mSize = 0;
+    var mMoves = 0;
     var self = this;
 
     this.initGame = function (size) {
@@ -48,6 +47,7 @@ function Game() {
         mPlayers = [];
         setPlayer(0);
         mSize = size;
+        mMoves = 0;
         mGameBoard = new GameBoard();
         mGameBoard.initGameBoard(size,size);
 
@@ -78,16 +78,95 @@ function Game() {
 
     function setPlayer(player) {
         mCurrentPlayer = player;
-        console.log("current player is ",self.getCurrentPlayer());
+        //console.log("current player is ",self.getCurrentPlayer());
         //TODO:show current player has been switched
     }
 
+    this.getSize = function () {
+        return mSize;
+    };
 
+    this.checkWin = function (cell) {
+        mMoves++;
 
-    this.checkWin = function () {
-        var gameBoard = this.getGameBoard();
+        var index = cell.getCellID();
+        var row = Math.floor(index/mSize);
+        var col = index % mSize;
+
+        var matchX = 0;
+        var matchY = 0;
+
+        //check row
+        for (var i = 0; i < mSize; i++) {
+            var checkCell = mGameBoard.getCellByID(row * mSize + i);
+            if (checkCell.getState() === cellState.stateX) {
+                matchX++;
+            }else if (checkCell.getState() === cellState.stateO) {
+                matchY++;
+            }
+        }
+
+        if (doWin(matchX,matchY)) return;
+
+        matchX = 0;
+        matchY = 0;
+
+        //check column
+        for (var i = 0; i < mSize; i++) {
+            var checkCell = mGameBoard.getCellByID(i * mSize + col);
+            if (checkCell.getState() === cellState.stateX) {
+                matchX++;
+            }else if (checkCell.getState() === cellState.stateO) {
+                matchY++;
+            }
+        }
+
+        if (doWin(matchX,matchY)) return;
+
+        matchX = 0;
+        matchY = 0;
+
+        for (var i = 0, j = 0; i < mSize; i++, j++) {
+            var checkCell = mGameBoard.getCellByID(i * mSize + j);
+            if (checkCell.getState() === cellState.stateX) {
+                matchX++;
+            }else if (checkCell.getState() === cellState.stateO) {
+                matchY++;
+            }
+        }
+
+        if (doWin(matchX,matchY)) return;
+
+        matchX = 0;
+        matchY = 0;
+
+        for (var i = 0, j = mSize - 1; i < mSize; i++, j--) {
+            var checkCell = mGameBoard.getCellByID(i * mSize + j);
+            if (checkCell.getState() === cellState.stateX) {
+                matchX++;
+            }else if (checkCell.getState() === cellState.stateO) {
+                matchY++;
+            }
+        }
+
+        if (doWin(matchX,matchY)) return;
+
+        if (mMoves == mSize*mSize - 1) {
+            console.log("No Winner");
+        }
 
     };
+
+
+    function doWin(matchX,matchY) {
+        if (matchX == mSize) {
+            console.log("Player 1 wins");
+            return true;
+        } else if (matchY == mSize) {
+            console.log("Player 2 wins");
+            return true;
+        }
+    }
 
     this.resetGame = function () {
         //setPlayer(0);
@@ -147,8 +226,8 @@ function GameBoard() {
         return null;
     };
 
-    this.getMoves = function() {
-      return 0;
+    this.getCellByID = function (id) {
+      return mCells[id];
     };
 
     this.resetBoard = function () {
@@ -199,4 +278,5 @@ function Cell(cellID) {
 function Player(id,symbol) {
     this.playerID = id;
     this.symbol = symbol;
+    this.score = 0;
 }
