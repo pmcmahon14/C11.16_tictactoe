@@ -1,3 +1,14 @@
+html,
+body{
+    min-height:100%;
+}
+
+body{
+    background-image: url('img/grid2.jpg');
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+
 .cell{
     width:12vw;
     height:12vw;
@@ -12,8 +23,8 @@
     line-height:12vw;
     font-size:10vw;
     font-family: 'Nunito', sans-serif;
-    text-shadow: 0 0 10px #B0FFFA;
     font-weight: 100;
+    text-shadow: 0 0 15px #59fffd;
 }
 
 .row{
@@ -22,15 +33,35 @@
     display:flex;
     justify-content:space-between;
     margin:2vw auto;
+    flex-shrink:0;
 }
 
-#content{
-    background-color: transparent;
-    background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%,    transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%,          transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%,       transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%,          transparent);
-    height:100%;
-    background-size:50px 50px;
+.cell5x5{
+    width:8vw;
+    height:6.5vw;
+    display:inline-block;
+    margin: 1vw 1vw;
+    background-color: #000000;
+    border-radius: 5%;
+    box-shadow: 0 0 15px #59fffd;
+    color:white;
+    text-align:center;
+    vertical-align: middle;
+    line-height:6.5vw;
+    font-size:5vw;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 100;
+    text-shadow: 0 0 15px #59fffd;
 }
 
+.row5x5{
+    width:40vw;
+    height: 8vw;
+    display:flex;
+    justify-content:space-between;
+    margin:1.5vw auto;
+    flex-shrink:0;
+}
 
 .top{
     height:20vh;
@@ -42,35 +73,15 @@
     top:5vw;
 }
 
-.player1{
-    display:inline-block;
-    width:20%;
-    height:100%;
-    background-color:black;
-    float:left;
-    font-family: 'Source Code Pro', monospace;
-    font-size:3vw;
-    text-align:center;
-    box-shadow: 0 0 15px #59fffd;
-    color:white;
-    border-radius: 10%;
-    padding-top:2%;
-}
-
-.player1 p{
-    -webkit-box-reflect: below -18px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(255, 255,     255, 0.3)));
-}
-
-.player2 p{
-    -webkit-box-reflect: below -18px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(255, 255,     255, 0.3)));
+.playerText,
+.playerText{
+    -webkit-box-reflect: below -18px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(255, 255, 255, 0.2)));
 }
 
 .time_bar{
     display:inline-block;
     width:50%;
     height:100%;
-    background-color:black;
-    box-shadow: 0 0 15px #59fffd;
     margin:0 auto;
 }
 
@@ -79,10 +90,10 @@
     top:8vh;
 }
 
-.player2{
+.player1{
     display:inline-block;
     width:20%;
-    height:100%;
+    height:120%;
     background-color:black;
     float:right;
     font-family: 'Source Code Pro', monospace;
@@ -94,11 +105,34 @@
     padding-top:2%;
 }
 
+.player2{
+    display:inline-block;
+    width:20%;
+    height:120%;
+    background-color:black;
+    float:right;
+    font-family: 'Source Code Pro', monospace;
+    font-size:3vw;
+    text-align:center;
+    box-shadow: 0 0 15px #59fffd;
+    color:white;
+    border-radius: 10%;
+    padding-top:2%;
+}
+
+.player1.highlightCurrentPlayer,
+.player2.highlightCurrentPlayer{
+    transition: background 0.5s linear 0s, color 0.5s linear 0s;
+    background-color: rgba(223, 137, 16, 0.75);
+    box-shadow: 0 0 15px #fbe303;
+}
+
 .game_board{
-    width:70%;
-    height:70%;
+    width:50vw;
+    height:80%;
     margin: 0 auto;
     position:relative;
+    left:6.5vw;
     top:10vh;
 }
 
@@ -111,40 +145,48 @@
     top:10vh;
 }
 
-.button_wrapper{
-    margin: 0 auto;
-    height:5vw;
-    width:50%;
+#startAndReset{
+    height:25vw;
+    width:15vw;
     position:relative;
-    top:3vw;
-    display:flex;
-    justify-content:space-between;
+    top:13vw;
+    left:6vw;
+    display:inline-block;
+    float:left;
+}
+
+#toggleBetweenBoards{
+    height:25vw;
+    width:15vw;
+    position:relative;
+    top:13vw;
+    right:6vw;
+    display:inline-block;
+    float:right;
 }
 
 #timeBar{
     width:50vw;
-    background-color:blue;
+    background-color:#59fffd;
 }
 
-button.threeXthree{
+.progress .progress-bar{
+    background-color:#df8910;
+    box-shadow: 0 0 15px #fbe303;
+    transition: 100ms;
+}
+
+.time_bar .progress{
     background-color:black;
-    width:10vw;
-    height:5vw;
-    display:inline-block;
-    font-family: 'Source Code Pro', monospace;
-    border:none;
-    text-decoration:none;
-    box-shadow: 0 0 15px #59fffd;
-    color:white;
-    text-align:center;
-    border-radius: 10%;
-    margin:0 auto;
-    font-size:2vw;
+    box-shadow: 0 0 15px #fbe303;
 }
 
+button.start,
+button.reset,
+button.threeXthree,
 button.fiveXfive{
     background-color:black;
-    width:10vw;
+    width:15vw;
     height:5vw;
     display:inline-block;
     font-family: 'Source Code Pro', monospace;
@@ -154,48 +196,23 @@ button.fiveXfive{
     color:white;
     text-align:center;
     border-radius: 10%;
-    margin:0 auto;
+    margin:1vw auto;
     font-size:2vw;
-}
-
-button.reset{
-    background-color:black;
-    width:10vw;
-    height:5vw;
-    display:inline-block;
-    font-family: 'Source Code Pro', monospace;
-    border:none;
-    text-decoration:none;
-    box-shadow: 0 0 15px #59fffd;
-    color:white;
-    text-align:center;
-    border-radius: 10%;
-    margin:0 auto;
-    font-size:2vw;
+    transition: background 0.5s linear 0s, color 0.5s linear 0s;
 }
 
 button:hover{
-    background-color: rgba(20, 63, 78, 0.71);
+    background-color: rgba(20, 63, 78, 0.75);
+    box-shadow: 0 0 15px #fbe303;
 }
 
 button:active {
-    background-color: #000000;
-    box-shadow: 0 5px #666;
+    background-color: rgba(20, 63, 78, 0.71);
+    box-shadow: 0 0 15px #fbe303;
     transform: translateY(4px);
 }
 
-body{
-    width:100%;
-    height:100%;
-    background-color: #000000;
-    background-image:linear-gradient(#383838, #000000);
-}
-
-.meter{
-    width:50vw;
-    height:20vw;
-}
-
-html{
-    height:100%;
+.wins{
+    color:white;
+    -webkit-box-reflect:none;
 }

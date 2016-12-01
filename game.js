@@ -21,6 +21,8 @@ function setupGame() {
     $(".fiveXfive").click(function () {
         game.newGame(5);
     });
+
+    $('#modalWin').modal('show');
 }
 
 function handleCellClick() {
@@ -45,7 +47,6 @@ function Game() {
     this.initGame = function (size) {
         //create game board
         mPlayers = [];
-        setPlayer(0);
         mSize = size;
         mMoves = 0;
         mGameBoard = new GameBoard();
@@ -56,6 +57,7 @@ function Game() {
         var player2 = new Player(1,cellState.stateO);
 
         mPlayers.push(player1,player2);
+        setPlayer(0);
 
         $(".cell").click(handleCellClick);
     };
@@ -80,6 +82,14 @@ function Game() {
         mCurrentPlayer = player;
         //console.log("current player is ",self.getCurrentPlayer());
         //TODO:show current player has been switched
+        if (player==0){
+            $('.player1').addClass('highlightCurrentPlayer');
+            $('.player2').removeClass('highlightCurrentPlayer');
+        }
+        else if(player==1){
+            $('.player2').addClass('highlightCurrentPlayer');
+            $('.player1').removeClass('highlightCurrentPlayer');
+        }
     }
 
     this.getSize = function () {
