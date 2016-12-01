@@ -11,33 +11,53 @@ $(document).ready(setupGame);
 
 function setupGame() {
     game = new Game();
-    game.initGame($(".cell"));
+    game.initGame(3);
 
-    $(".cell").click(function () {
-        var cell = game.getGameBoard().getCell(this);
-        if (cell.getState() === cellState.stateDefault) {
-            var player = game.getCurrentPlayer();
-            cell.setState(player.symbol);
-            game.switchPlayer();
-        }
+    $(".reset").click(game.resetGame);
+    $(".threeXthree").click(function () {
+        game.newGame(3)
     });
+
+    $(".fiveXfive").click(function () {
+        game.newGame(5);
+    });
+}
+
+function handleCellClick() {
+    var cell = game.getGameBoard().getCell(this);
+    if (cell.getState() === cellState.stateDefault) {
+        var player = game.getCurrentPlayer();
+        cell.setState(player.symbol);
+        player.score += cell.getCellID();
+        game.switchPlayer();
+
+        //console.log(game.checkWin());
+    }
+    //console.log("clicked");
 }
 
 function Game() {
     var mGameBoard = null;
-    var players = [];
-    var currentPlayer = 0;
+    var mPlayers = [];
+    var mCurrentPlayer = 0;
+    var mSize = 0;
+    var self = this;
 
-    this.initGame = function (cellsElement) {
+    this.initGame = function (size) {
         //create game board
+        mPlayers = [];
+        setPlayer(0);
+        mSize = size;
         mGameBoard = new GameBoard();
-        mGameBoard.initGameBoard(3,3,cellsElement);
+        mGameBoard.initGameBoard(size,size);
 
         //create players
         var player1 = new Player(0,cellState.stateX);
         var player2 = new Player(1,cellState.stateO);
 
-        players.push(player1,player2);
+        mPlayers.push(player1,player2);
+
+        $(".cell").click(handleCellClick);
     };
 
     this.getGameBoard = function () {
@@ -45,71 +65,126 @@ function Game() {
     };
 
     this.getCurrentPlayer = function() {
-        return players[currentPlayer];
+        return mPlayers[mCurrentPlayer];
     };
 
     this.switchPlayer = function () {
-        currentPlayer++;
-        if (currentPlayer >= players.length) {
-            currentPlayer = 0;
+        var player = mCurrentPlayer + 1;
+        if (player >= mPlayers.length) {
+            player = 0;
         }
-        console.log("current player is ",this.getCurrentPlayer());
-        //TODO:show current player has been switched
+        setPlayer(player);
     };
+
+    function setPlayer(player) {
+        mCurrentPlayer = player;
+        console.log("current player is ",self.getCurrentPlayer());
+        //TODO:show current player has been switched
+    }
+
+
+
+    this.checkWin = function () {
+        var gameBoard = this.getGameBoard();
+
+    };
+
+    this.resetGame = function () {
+        //setPlayer(0);
+        //mGameBoard.resetBoard();
+        self.newGame(mSize);
+    };
+
+    this.newGame = function(size) {
+        $(".row").detach();
+        game.initGame(size);
+    }
 }
 
 function GameBoard() {
     var mCells = [];
     var mRows = 0;
     var mCols = 0;
-    var mCellsElement = null;
+    var mCellsElement = $(".game_board");
+    var mRowElements = [];
 
-    //create game board - using elements in the dom
-    this.initGameBoard = function(rows,cols,cellsElement) {
+    this.initGameBoard = function(rows,cols) {
         mRows = rows;
         mCols = cols;
-        mCellsElement = cellsElement;
 
         //create cell objects for size of board - use dom elements for count
-        for (var i = 0; i < mCellsElement.length; i++) {
+        for (var i = 0; i < mRows*mCols; i++) {
             var cell = this.createCell(i);
             mCells.push(cell);
+
+            //Make a new row
+            if (!(i % cols)) {
+                mRowElements.push(createRowElement());
+            }
+
+            //Add cells to row
+            var currentRow = mRowElements[mRowElements.length - 1];
+            currentRow.append(cell.getCellElement());
+        }
+
+        //Append rows to game board in dom
+        for (var j in mRowElements) {
+            mCellsElement.append(mRowElements[j]);
         }
     };
 
     this.createCell = function (cellID) {
-        return new Cell(cellID,mCellsElement[cellID]);
+        return new Cell(cellID);
     };
 
     this.getCell = function (cellElement) {
         //get cell by element clicked - cell has element var
         for (var i in mCells) {
-            if (cellElement === mCells[i].getCellElement()) {
+            if (cellElement === mCells[i].getCellElement()[0]) {
                 return mCells[i];
             }
         }
         return null;
+    };
+
+    this.getMoves = function() {
+      return 0;
+    };
+
+    this.resetBoard = function () {
+        for (var i in mCells) {
+            mCells[i].setState(cellState.stateDefault);
+        }
+    };
+
+    function createRowElement() {
+        return $("<div>",{
+            class:"row"
+        })
     }
 }
 
-function Cell(cellID,cellElement) {
+function Cell(cellID) {
     var mState = cellState.stateDefault;
     var mCellID = cellID;
-    var mCellElement = cellElement;
+    var mCellElement = $("<div>",{
+        class:"cell"
+    });
 
     this.getState = function () {
         return mState;
     };
 
-    this.setState = function (cellState) {
-        mState = cellState;
+    this.setState = function (state) {
+        mState = state;
         if (mState === cellState.stateX) {
-
+            $(mCellElement).text("X");
         } else if (mState === cellState.stateO) {
-
+            $(mCellElement).text("O");
+        } else {
+            $(mCellElement).text(" ");
         }
         //TODO:set cell element based on state
-        $(mCellElement).text(mState);
     };
 
     this.getCellID = function () {
