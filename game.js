@@ -7,6 +7,8 @@ var cellState = {
     stateO:"O"
 };
 var game = null;
+var playerone = 0;
+var playertwo = 0;
 $(document).ready(setupGame);
 
 function setupGame() {
@@ -22,10 +24,11 @@ function setupGame() {
         game.newGame(5);
     });
 
-    $('#modalWin').modal('show');
+    $(".start").click(game.startGame);
 }
 
 function handleCellClick() {
+    if (!game.inPlay) return;
     var cell = game.getGameBoard().getCell(this);
     if (cell.getState() === cellState.stateDefault) {
         var player = game.getCurrentPlayer();
@@ -43,6 +46,11 @@ function Game() {
     var mSize = 0;
     var mMoves = 0;
     var self = this;
+    this.inPlay = false;
+    var timer = null;
+    var startTime;
+    var timerCount = 0;
+    var progressBar = $(".progress-bar");
 
     this.initGame = function (size) {
         //create game board
@@ -51,13 +59,14 @@ function Game() {
         mMoves = 0;
         mGameBoard = new GameBoard();
         mGameBoard.initGameBoard(size,size);
+        self.inPlay = false;
+        self.clearBoard = true;
 
         //create players
         var player1 = new Player(0,cellState.stateX);
         var player2 = new Player(1,cellState.stateO);
 
         mPlayers.push(player1,player2);
-        setPlayer(0);
 
         $(".cell").click(handleCellClick);
     };
@@ -81,7 +90,6 @@ function Game() {
     function setPlayer(player) {
         mCurrentPlayer = player;
         //console.log("current player is ",self.getCurrentPlayer());
-        //TODO:show current player has been switched
         if (player==0){
             $('.player1').addClass('highlightCurrentPlayer');
             $('.player2').removeClass('highlightCurrentPlayer');
@@ -163,19 +171,79 @@ function Game() {
 
         if (mMoves == mSize*mSize - 1) {
             console.log("No Winner");
+            $(".modal-title").text("No Winner");
+            finishGame();
         }
 
+        resetTimer();
     };
-
 
     function doWin(matchX,matchY) {
         if (matchX == mSize) {
             console.log("Player 1 wins");
+            playerone = playerone + 1;
+            document.querySelector('.wincount1').innerHTML = playerone;
+            $(".modal-title").text("Player 1 Wins");
+            finishGame();
             return true;
         } else if (matchY == mSize) {
             console.log("Player 2 wins");
+            playertwo = playertwo + 1;
+            document.querySelector('.wincount2').innerHTML = playertwo;
+            $(".modal-title").text("Player 2 Wins");
+            finishGame();
             return true;
         }
+    }
+
+    function finishGame() {
+        $('.player1').removeClass('highlightCurrentPlayer');
+        $('.player2').removeClass('highlightCurrentPlayer');
+        clearTimer();
+        self.inPlay = false;
+        $('#modalWin').modal('show');
+    }
+
+    this.startGame = function () {
+        if (self.clearBoard) {
+            setPlayer(0);
+            self.clearBoard = false;
+            self.inPlay = true;
+            startTimer();
+        }
+    };
+
+    function startTimer() {
+        startTime = Date.now();
+        timer = setTimeout(updateProgress,100);
+    }
+
+    function resetTimer() {
+        startTime = Date.now();
+        progressBar.css("width","0%");
+        timerCount = 0;
+        //console.log("resetting timer");
+    }
+
+    function updateProgress() {
+        if (timerCount == 50) {
+            resetTimer();
+            self.switchPlayer();
+        } else {
+            timerCount++;
+            var percent = Math.floor(((Date.now() - startTime) / 5000) * 100);
+            progressBar.css("width",percent+"%");
+        }
+
+        timer = setTimeout(updateProgress,100);
+        //console.log("progress count " + timerCount);
+    }
+
+    function clearTimer() {
+        timerCount = 0;
+        clearTimeout(timer);
+        timer = null;
+        progressBar.css("width","0%");
     }
 
     this.resetGame = function () {
@@ -185,7 +253,10 @@ function Game() {
     };
 
     this.newGame = function(size) {
+        clearTimer();
+        self.clearBoard = true;
         $(".row").detach();
+        $(".row5x5").detach();
         game.initGame(size);
     }
 }
@@ -247,8 +318,10 @@ function GameBoard() {
     };
 
     function createRowElement() {
+        var rowClass = "row";
+        if (game.getSize() === 5) rowClass = "row5x5";
         return $("<div>",{
-            class:"row"
+            class:rowClass
         })
     }
 }
@@ -256,8 +329,10 @@ function GameBoard() {
 function Cell(cellID) {
     var mState = cellState.stateDefault;
     var mCellID = cellID;
+    var cellClass = "cell";
+    if (game.getSize() === 5) cellClass = "cell5x5";
     var mCellElement = $("<div>",{
-        class:"cell"
+        class:cellClass
     });
 
     this.getState = function () {
@@ -274,7 +349,6 @@ function Cell(cellID) {
             $(mCellElement).text(" ");
         }
         //TODO:set cell element based on state
-
     };
 
     this.getCellID = function () {
@@ -289,8 +363,4 @@ function Cell(cellID) {
 function Player(id,symbol) {
     this.playerID = id;
     this.symbol = symbol;
-
-
-    this.score = 0;
 }
-
