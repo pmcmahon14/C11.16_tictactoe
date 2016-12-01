@@ -27,7 +27,7 @@ body{
     text-shadow: 0 0 15px #59fffd;
 }
 
-.row{
+.game_board .row{
     width:40vw;
     height: 12vw;
     display:flex;
@@ -54,7 +54,7 @@ body{
     text-shadow: 0 0 15px #59fffd;
 }
 
-.row5x5{
+.game_board .row5x5{
     width:40vw;
     height: 8vw;
     display:flex;
@@ -132,7 +132,6 @@ body{
     height:80%;
     margin: 0 auto;
     position:relative;
-    left:6.5vw;
     top:10vh;
 }
 

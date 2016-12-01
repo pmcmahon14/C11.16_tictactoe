@@ -256,6 +256,7 @@ function Game() {
         clearTimer();
         self.clearBoard = true;
         $(".row").detach();
+        $(".row5x5").detach();
         game.initGame(size);
     }
 }
@@ -317,8 +318,10 @@ function GameBoard() {
     };
 
     function createRowElement() {
+        var rowClass = "row";
+        if (game.getSize() === 5) rowClass = "row5x5";
         return $("<div>",{
-            class:"row"
+            class:rowClass
         })
     }
 }
@@ -326,8 +329,10 @@ function GameBoard() {
 function Cell(cellID) {
     var mState = cellState.stateDefault;
     var mCellID = cellID;
+    var cellClass = "cell";
+    if (game.getSize() === 5) cellClass = "cell5x5";
     var mCellElement = $("<div>",{
-        class:"cell"
+        class:cellClass
     });
 
     this.getState = function () {
