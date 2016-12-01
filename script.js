@@ -4,21 +4,7 @@
  */
 
 
-/*tag each cell with a score value*/
 /* add to board setup*/
-
-
-var set;
-    /*function scorecell() {
-        for (n=0; n<size; n++) {
-        cell[0].indicator = indicator;
-        cell.click(set);
-        row.append(cell);
-        squares.push(cell);
-        indicator += indicator;
-        }
-    }*/
-
 /* how to tell if a win*/
 var moves;
 var combosmall = [[0,3,6], [1,4,7], [2,5,8], [0,4,8], [0,1,2], [3,4,5], [6,7,8], [2,4,6]];
@@ -48,7 +34,6 @@ var combobig = [[0,5,10,15,20], [1,6,11,16,21], [2,7,12,17,22], [3,8,13,18,23], 
             for (var j=0; j<combobig[i].length; j++) {
                 var matchbig = [];
                 matchbig.push(combobig[i][j]);
-                /*var y = this.board[pattern[combos[]]] + this.board[pattern[5]] + this.board[pattern[10]] + this.board[pattern[15]] + this.board[pattern[20]];*/
                 if (matchbig === "XXXXX") {
                     console.log("X won!");
                 } else if (matchbig === "OOOOO") {
@@ -99,12 +84,12 @@ var combobig = [[0,5,10,15,20], [1,6,11,16,21], [2,7,12,17,22], [3,8,13,18,23], 
                     console.log("3x3 button was clicked");
                     /*size = 3;*/
                 }
-                //winsmall goes here?
+                //function three goes here?
                 else if (this.hasClass('fiveXfive')) {
                     console.log("5x5 button was clicked");
                     /*size = 5;*/
                 }
-                //winbig goes here?
+                //function five goes here?
                 else {
                     console.log("Reset button was clicked");
                 }
