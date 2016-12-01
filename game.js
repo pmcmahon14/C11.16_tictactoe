@@ -7,6 +7,8 @@ var cellState = {
     stateO:"O"
 };
 var game = null;
+var playerone = 0;
+var playertwo = 0;
 $(document).ready(setupGame);
 
 function setupGame() {
@@ -161,9 +163,13 @@ function Game() {
     function doWin(matchX,matchY) {
         if (matchX == mSize) {
             console.log("Player 1 wins");
+            playerone = playerone + 1;
+            document.querySelector('.wincount1').innerHTML = playerone;
             return true;
         } else if (matchY == mSize) {
             console.log("Player 2 wins");
+            playertwo = playertwo + 1;
+            document.querySelector('.wincount2').innerHTML = playertwo;
             return true;
         }
     }
