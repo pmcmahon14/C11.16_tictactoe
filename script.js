@@ -82,13 +82,13 @@ var combobig = [[0,5,10,15,20], [1,6,11,16,21], [2,7,12,17,22], [3,8,13,18,23], 
 
                 if (this.hasClass('threeXthree')) {
                     console.log("3x3 button was clicked");
-                    /*size = 3;*/
                 }
+
                 //function three goes here?
                 else if (this.hasClass('fiveXfive')) {
                     console.log("5x5 button was clicked");
-                    /*size = 5;*/
                 }
+
                 //function five goes here?
                 else {
                     console.log("Reset button was clicked");
