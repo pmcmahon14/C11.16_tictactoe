@@ -3,10 +3,13 @@
  * Created by Patrick on 11/30/2016.
  */
 
+/*for fun - a timer - kinda like speed chess*/
+
+//setTimeout(player_turn)
 
 /* add to board setup*/
 /* how to tell if a win*/
-var moves;
+var moves = 0;
 var combosmall = [[0,3,6], [1,4,7], [2,5,8], [0,4,8], [0,1,2], [3,4,5], [6,7,8], [2,4,6]];
     win = function three() {
         for (var i=0; i<combosmall.length; i++) {
@@ -20,6 +23,7 @@ var combosmall = [[0,3,6], [1,4,7], [2,5,8], [0,4,8], [0,1,2], [3,4,5], [6,7,8],
                 } else if (moves = 9) {
                     console.log("It's a tie.");
                 } else {
+                    moves = ++moves;
                     return;
                 }
             }
@@ -41,6 +45,7 @@ var combobig = [[0,5,10,15,20], [1,6,11,16,21], [2,7,12,17,22], [3,8,13,18,23], 
                 } else if (moves = 25) {
                     console.log("It's a tie.");
                 } else {
+                    moves = ++moves;
                     return;
                 }
             }
