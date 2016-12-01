@@ -3,8 +3,8 @@
  */
 var cellState = {
     stateDefault:"stateDefault",
-    stateX:"stateX",
-    stateO:"stateO"
+    stateX:"X",
+    stateO:"O"
 };
 var game = null;
 $(document).ready(setupGame);

@@ -36,6 +36,34 @@ var scoretotal = [7, 56, 73, 84, 146, 273, 292, 448];
         }
     }
 
+var cell;
+var score;
+    function scorecell() {
+        for (n=0; n<size-1; n++) {
+        cell[0].indicator = indicator;
+        cell.click(set);
+        row.append(cell);
+        squares.push(cell);
+        indicator += indicator;
+        }
+    }
+
+/* how to tell if a win*/
+var moves;
+var scoretotal = [7, 56, 73, 84, 146, 273, 292, 448];
+    function winsmall() {
+        for (i=0; i<scoretotal.length; i++) {
+            if (playone = scoretotal[i]) {
+                return "X won!";
+            } else if (playtwo = scoretotal[i]) {
+                return "O won!";
+            } else if (moves = 9) {
+                return "It's a tie.";
+            } else {
+            return;
+        }
+        }
+    }
 
 /*if on a 5x5 grid*/
 
@@ -103,5 +131,4 @@ var combos = [[0,5,10,15,20], [1,6,11,16,21], [2,7,12,17,22], [3,8,13,18,23], [4
 
         });
     }
-
 
