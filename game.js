@@ -7,6 +7,8 @@ var cellState = {
     stateO:"O"
 };
 var game = null;
+var playerone = 0;
+var playertwo = 0;
 $(document).ready(setupGame);
 
 function setupGame() {
@@ -22,7 +24,7 @@ function setupGame() {
         game.newGame(5);
     });
 
-    $('#modalWin').modal('show');
+    $(".start").click(game.startGame);
 }
 
 function handleCellClick() {
@@ -58,15 +60,13 @@ function Game() {
         mGameBoard = new GameBoard();
         mGameBoard.initGameBoard(size,size);
         self.inPlay = false;
+        self.clearBoard = true;
 
         //create players
         var player1 = new Player(0,cellState.stateX);
         var player2 = new Player(1,cellState.stateO);
 
         mPlayers.push(player1,player2);
-
-        $('.player1').removeClass('highlightCurrentPlayer');
-        $('.player2').removeClass('highlightCurrentPlayer');
 
         $(".cell").click(handleCellClick);
     };
@@ -171,6 +171,8 @@ function Game() {
 
         if (mMoves == mSize*mSize - 1) {
             console.log("No Winner");
+            $(".modal-title").text("No Winner");
+            finishGame();
         }
 
         resetTimer();
@@ -179,21 +181,36 @@ function Game() {
     function doWin(matchX,matchY) {
         if (matchX == mSize) {
             console.log("Player 1 wins");
-            clearTimer();
-            self.inPlay = false;
+            playerone = playerone + 1;
+            document.querySelector('.wincount1').innerHTML = playerone;
+            $(".modal-title").text("Player 1 Wins");
+            finishGame();
             return true;
         } else if (matchY == mSize) {
             console.log("Player 2 wins");
-            clearTimer();
-            self.inPlay = false;
+            playertwo = playertwo + 1;
+            document.querySelector('.wincount2').innerHTML = playertwo;
+            $(".modal-title").text("Player 2 Wins");
+            finishGame();
             return true;
         }
     }
 
+    function finishGame() {
+        $('.player1').removeClass('highlightCurrentPlayer');
+        $('.player2').removeClass('highlightCurrentPlayer');
+        clearTimer();
+        self.inPlay = false;
+        $('#modalWin').modal('show');
+    }
+
     this.startGame = function () {
-        setPlayer(0);
-        self.inPlay = true;
-        startTimer();
+        if (self.clearBoard) {
+            setPlayer(0);
+            self.clearBoard = false;
+            self.inPlay = true;
+            startTimer();
+        }
     };
 
     function startTimer() {
@@ -237,6 +254,7 @@ function Game() {
 
     this.newGame = function(size) {
         clearTimer();
+        self.clearBoard = true;
         $(".row").detach();
         game.initGame(size);
     }
@@ -326,7 +344,6 @@ function Cell(cellID) {
             $(mCellElement).text(" ");
         }
         //TODO:set cell element based on state
-
     };
 
     this.getCellID = function () {
