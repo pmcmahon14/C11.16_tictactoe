@@ -1,45 +1,218 @@
+html,
+body{
+    min-height:100%;
+}
+
+body{
+    background-image: url('img/grid2.jpg');
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+
 .cell{
-    width:20vw;
-    height:30vh;
+    width:12vw;
+    height:12vw;
     display:inline-block;
     margin: 1vw 1vw;
     background-color: #000000;
     border-radius: 5%;
-    box-shadow: 0 0 15px #b0fffa;
+    box-shadow: 0 0 15px #59fffd;
     color:white;
+    text-align:center;
+    vertical-align: middle;
+    line-height:12vw;
+    font-size:10vw;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 100;
+    text-shadow: 0 0 15px #59fffd;
 }
 
 .row{
-    width:60vw;
-    height: 30vh;
+    width:40vw;
+    height: 12vw;
     display:flex;
     justify-content:space-between;
     margin:2vw auto;
+    flex-shrink:0;
+}
 
+.cell5x5{
+    width:8vw;
+    height:6.5vw;
+    display:inline-block;
+    margin: 1vw 1vw;
+    background-color: #000000;
+    border-radius: 5%;
+    box-shadow: 0 0 15px #59fffd;
+    color:white;
+    text-align:center;
+    vertical-align: middle;
+    line-height:6.5vw;
+    font-size:5vw;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 100;
+    text-shadow: 0 0 15px #59fffd;
+}
+
+.row5x5{
+    width:40vw;
+    height: 8vw;
+    display:flex;
+    justify-content:space-between;
+    margin:1.5vw auto;
+    flex-shrink:0;
+}
+
+.top{
+    height:20vh;
+    width:90vw;
+    display:flex;
+    justify-content:space-between;
+    margin:0 auto;
+    position:relative;
+    top:5vw;
+}
+
+.playerText,
+.playerText{
+    -webkit-box-reflect: below -18px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(255, 255, 255, 0.2)));
+}
+
+.time_bar{
+    display:inline-block;
+    width:50%;
+    height:100%;
+    margin:0 auto;
+}
+
+.progress{
+    position:relative;
+    top:8vh;
+}
+
+.player1{
+    display:inline-block;
+    width:20%;
+    height:120%;
+    background-color:black;
+    float:right;
+    font-family: 'Source Code Pro', monospace;
+    font-size:3vw;
+    text-align:center;
+    box-shadow: 0 0 15px #59fffd;
+    color:white;
+    border-radius: 10%;
+    padding-top:2%;
+}
+
+.player2{
+    display:inline-block;
+    width:20%;
+    height:120%;
+    background-color:black;
+    float:right;
+    font-family: 'Source Code Pro', monospace;
+    font-size:3vw;
+    text-align:center;
+    box-shadow: 0 0 15px #59fffd;
+    color:white;
+    border-radius: 10%;
+    padding-top:2%;
+}
+
+.player1.highlightCurrentPlayer,
+.player2.highlightCurrentPlayer{
+    transition: background 0.5s linear 0s, color 0.5s linear 0s;
+    background-color: rgba(223, 137, 16, 0.75);
+    box-shadow: 0 0 15px #fbe303;
 }
 
 .game_board{
-    width:80%;
+    width:50vw;
     height:80%;
     margin: 0 auto;
+    position:relative;
+    left:6.5vw;
+    top:10vh;
 }
 
 .bottom{
     margin: 0 auto;
+    display:block;
+    height:10vw;
+    width:100%;
+    position:relative;
+    top:10vh;
 }
 
-button .threeXthree{
+#startAndReset{
+    height:25vw;
+    width:15vw;
+    position:relative;
+    top:13vw;
+    left:6vw;
+    display:inline-block;
+    float:left;
+}
+
+#toggleBetweenBoards{
+    height:25vw;
+    width:15vw;
+    position:relative;
+    top:13vw;
+    right:6vw;
+    display:inline-block;
+    float:right;
+}
+
+#timeBar{
+    width:50vw;
+    background-color:#59fffd;
+}
+
+.progress .progress-bar{
+    background-color:#df8910;
+    box-shadow: 0 0 15px #fbe303;
+    transition: 100ms;
+}
+
+.time_bar .progress{
     background-color:black;
+    box-shadow: 0 0 15px #fbe303;
 }
 
-button .fiveXfive{
-
-}
-
-button .reset{
-
-}
-
-body{
+button.start,
+button.reset,
+button.threeXthree,
+button.fiveXfive{
     background-color:black;
+    width:15vw;
+    height:5vw;
+    display:inline-block;
+    font-family: 'Source Code Pro', monospace;
+    border:none;
+    text-decoration:none;
+    box-shadow: 0 0 15px #59fffd;
+    color:white;
+    text-align:center;
+    border-radius: 10%;
+    margin:1vw auto;
+    font-size:2vw;
+    transition: background 0.5s linear 0s, color 0.5s linear 0s;
+}
+
+button:hover{
+    background-color: rgba(20, 63, 78, 0.75);
+    box-shadow: 0 0 15px #fbe303;
+}
+
+button:active {
+    background-color: rgba(20, 63, 78, 0.71);
+    box-shadow: 0 0 15px #fbe303;
+    transform: translateY(4px);
+}
+
+.wins{
+    color:white;
+    -webkit-box-reflect:none;
 }

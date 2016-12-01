@@ -8,26 +8,67 @@
     <title>Tic Tac Toe</title>
     <link href="https://fonts.googleapis.com/css?family=Inconsolata|Nunito" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
     <script src="game.js"></script>
 
 </head>
 <body>
+
 <div class="top">
-    <div class="player1"></div>
-    <div class="player2"></div>
+    <div class="player1">
+        <p class="playerText">PLAYER 1</p>
+        <p class="wins">Wins:</p>
+    </div>
+
+    <div class="time_bar"> <!--Start of the time bar-->
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"                                                  style="width:10%">
+            </div>
+        </div>
+    </div> <!--End of the time bar-->
+
+    <div class="player2 highlightCurrentPlayer">
+        <p class="playerText">PLAYER 2</p>
+        <p class="wins">Wins:</p>
+    </div>
 </div>
+
+<div class="button_wrapper" id="startAndReset">
+    <button class="start">START</button>
+    <button class="reset">RESET</button>
+</div>
+
+<div class="button_wrapper" id="toggleBetweenBoards">
+    <button class="threeXthree">3&times3</button>
+    <button class="fiveXfive">5&times5</button>
+</div>
+
 <div class="game_board">
 
 </div>
-<div class="bottom">
 
-    <button type="button" class="threeXthree">3x3</button>
-    <button type="button" class="fiveXfive">5x5</button>
-    <button type="button" class="reset">Reset</button>
-</div>
+<div id="modalWin" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">YOU WON!</h4>
+            </div>
+            <div class="modal-body">
+                <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
 </body>
 </html>

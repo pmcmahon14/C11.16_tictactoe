@@ -3,8 +3,8 @@
  */
 var cellState = {
     stateDefault:"stateDefault",
-    stateX:"stateX",
-    stateO:"stateO"
+    stateX:"X",
+    stateO:"O"
 };
 var game = null;
 $(document).ready(setupGame);
@@ -21,6 +21,8 @@ function setupGame() {
     $(".fiveXfive").click(function () {
         game.newGame(5);
     });
+
+    $('#modalWin').modal('show');
 }
 
 function handleCellClick() {
@@ -62,7 +64,9 @@ function Game() {
         var player2 = new Player(1,cellState.stateO);
 
         mPlayers.push(player1,player2);
-        setPlayer(0);
+
+        $('.player1').removeClass('highlightCurrentPlayer');
+        $('.player2').removeClass('highlightCurrentPlayer');
 
         $(".cell").click(handleCellClick);
     };
@@ -86,7 +90,14 @@ function Game() {
     function setPlayer(player) {
         mCurrentPlayer = player;
         //console.log("current player is ",self.getCurrentPlayer());
-        //TODO:show current player has been switched
+        if (player==0){
+            $('.player1').addClass('highlightCurrentPlayer');
+            $('.player2').removeClass('highlightCurrentPlayer');
+        }
+        else if(player==1){
+            $('.player2').addClass('highlightCurrentPlayer');
+            $('.player1').removeClass('highlightCurrentPlayer');
+        }
     }
 
     this.getSize = function () {
@@ -180,6 +191,7 @@ function Game() {
     }
 
     this.startGame = function () {
+        setPlayer(0);
         self.inPlay = true;
         startTimer();
     };
@@ -314,6 +326,7 @@ function Cell(cellID) {
             $(mCellElement).text(" ");
         }
         //TODO:set cell element based on state
+
     };
 
     this.getCellID = function () {
