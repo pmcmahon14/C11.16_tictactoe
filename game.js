@@ -32,10 +32,15 @@ function setupGame() {
     var imageSrc1 = 'img/cursor.png';
     var imageSrc2 = 'img/cursor.png';
     initialize(imageSrc1,25,25,imageSrc2, 25, 25, 1.2 );
+    var audio = {};
+    audio["dataline"] = new Audio();
+    audio["dataline"].src = "mp3/dataline.mp3";  //audio file source
+    audio["dataline"].play(); //audio file play
 }
 /**
  * Click handler for all cell objects
  */
+
 function handleCellClick() {
     if (!game.inPlay) return;
     var cell = game.getGameBoard().getCell(this);
@@ -44,6 +49,10 @@ function handleCellClick() {
         cell.setState(player.symbol);
         game.switchPlayer();
         game.checkWin(cell);
+        var audio = {};
+        audio["dataline"] = new Audio();
+        audio["dataline"].src = "mp3/zg_btn_sm1.wav";  //audio file source
+        audio["dataline"].play(); //audio file play
     }
     //console.log("clicked");
 }
@@ -287,12 +296,19 @@ function Game() {
     /**
      * Start button pressed. Only works if the game is in an unstarted state
      */
+
+
+
     this.startGame = function () {
         if (self.clearBoard) {
             setPlayer(0);
             self.clearBoard = false;
             self.inPlay = true;
             startTimer();
+            var audio = {};
+            audio["walk"] = new Audio();
+            audio["walk"].src = "mp3/11408^LASER1.mp3";  //audio file source
+            audio["walk"].play(); //audio file play
         }
     };
     /**
@@ -343,6 +359,7 @@ function Game() {
     /**
      * Reset the game
      */
+
     this.resetGame = function () {
         //setPlayer(0);
         //mGameBoard.resetBoard();
@@ -358,6 +375,10 @@ function Game() {
         $(".row").detach();
         $(".row5x5").detach();
         game.initGame(size);
+        var audio = {};
+        audio["resetLaser"] = new Audio();
+        audio["resetLaser"].src = "mp3/reset_laser.mp3";  //audio file source
+        audio["resetLaser"].play(); //audio file play
     }
 }
 /**
