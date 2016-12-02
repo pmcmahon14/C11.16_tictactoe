@@ -31,7 +31,7 @@ function setupGame() {
 
     var imageSrc1 = 'img/cursor.png';
     var imageSrc2 = 'img/cursor.png';
-    initialize(imageSrc1,25,25,imageSrc2, 25, 25,1.2);
+    initialize(imageSrc1,25,25,imageSrc2, 25, 25, 1.2 );
 }
 /**
  * Click handler for all cell objects
