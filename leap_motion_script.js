@@ -7,6 +7,7 @@ var Item = function(imgSrc, height, width, sensitivity) {
   img.style.position = 'absolute';
   img.style.height = height + 'px';     //you can changed the units from px if you so choose
   img.style.width = width + 'px';     //you can changed the units from px if you so choose
+    img.style.pointerEvents = "none";
   item.position = [];
   img.onload = function () {
       item.setTransform([window.innerWidth/2,window.innerHeight/2], 0);
@@ -76,21 +77,25 @@ var initialize = function(imgSrc1, width1, height1, imgSrc2, width2, height2, se
    * fill in with your own method
    */
    api.circle = function(){
-      console.log('circle method called');
+      //console.log('circle method called');
    }
    /*
    * method triggered when keytap gesture is called
    * fill in with your own method
    */
    api.keyTap = function(){
-      console.log('keyTap method called');
+      //console.log('keyTap method called');
+       pointerTapped(items[0].position[0],items[0].position[1]);
+       //pointerTapped(items[1].position[0],items[1].position[1]);
    }
    /*
    * method triggered when screenTap gesture is called
    * fill in with your own method
    */
    api.screenTap = function(){
-      console.log('screenTap method called');
+     //console.log('screenTap method called');
+       pointerTapped(items[0].position[0],items[0].position[1]);
+       //pointerTapped(items[1].position[0],items[1].position[1]);
    }
    /*
    * method triggered when swipe gesture is called
@@ -123,9 +128,9 @@ var initialize = function(imgSrc1, width1, height1, imgSrc2, width2, height2, se
 //a sample initialize call for two images, a basketball and a baseball. It can be called in another file
 // based on function(imgSrc, width, height, imgSrc2, width2, height2, sensitivity) 
 $(document).ready(function(){
-  var imageSrc1 = 'http://www.jumpstartsports.com/upload/images/Radnor_Basketball/448650-basketball__mario_sports_mix_.png';
-  var imageSrc2 = 'http://www.pngall.com/wp-content/uploads/2016/03/Baseball-Free-Download-PNG.png';
-  initialize(imageSrc1,25,25,imageSrc2, 25, 25, 1.5);  
+  // var imageSrc1 = 'http://www.jumpstartsports.com/upload/images/Radnor_Basketball/448650-basketball__mario_sports_mix_.png';
+  // var imageSrc2 = 'http://www.pngall.com/wp-content/uploads/2016/03/Baseball-Free-Download-PNG.png';
+  // initialize(imageSrc1,25,25,imageSrc2, 25, 25, 1.5);
 });
 
 //to utilize position values of a specific item call items[i].position[a] where i is the hand number (0 for first hand ) and a is coordinate piece (0 for , 1 for y)
