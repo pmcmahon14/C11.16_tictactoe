@@ -35,7 +35,12 @@ body{
     font-family: 'Nunito', sans-serif;
     font-weight: 100;
     text-shadow: 0 0 15px #59fffd;
+    transition: box-shadow 0.5s linear 0s, color 0.5s linear 0s;
     animation: glitch 2s steps(100) infinite;
+}
+
+.cell:hover{
+    box-shadow: 0 0 15px #fbe303;
 }
 
 /*Animated X's and O's*/
@@ -367,6 +372,14 @@ body{
     animation: glitch 2s steps(100) infinite;
 }
 
+.cell5x5{
+    transition: box-shadow 0.5s linear 0s, color 0.5s linear 0s;
+}
+
+.cell5x5:hover{
+    box-shadow: 0 0 15px #fbe303;
+}
+
 .game_board .row{
     width:40vw;
     height: 12vw;
@@ -570,7 +583,7 @@ button:active {
     top: 22vw;
     bottom: 0;
     left: 0;
-    z-index: 10040;
+    z-index: 100;
     overflow: auto;
     overflow-y: auto;
 }
@@ -691,6 +704,5 @@ button:active {
         position:relative;
         top:6vh;
     }
-
 
 }
