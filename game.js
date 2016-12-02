@@ -17,7 +17,7 @@ function setupGame() {
 
     $(".reset").click(game.resetGame);
     $(".threeXthree").click(function () {
-        game.newGame(3)
+        game.newGame(3);
     });
 
     $(".fiveXfive").click(function () {
@@ -25,6 +25,10 @@ function setupGame() {
     });
 
     $(".start").click(game.startGame);
+
+    var imageSrc1 = 'img/cursor.png';
+    var imageSrc2 = 'img/cursor.png';
+    initialize(imageSrc1,25,25,imageSrc2, 25, 25,1.2);
 }
 
 function handleCellClick() {
@@ -37,6 +41,27 @@ function handleCellClick() {
         game.checkWin(cell);
     }
     //console.log("clicked");
+}
+
+function pointerTapped(x,y) {
+    var element = document.elementFromPoint(x,y);
+    var cell = game.getGameBoard().getCell(element);
+
+    if (cell !== null) {
+        //console.log("pointer clicked cell",cell);
+        handleCellClick.call(element);
+    } else if (element === $(".reset")[0]){
+        game.resetGame();
+    } else if (element === $(".threeXthree")[0]){
+        game.newGame(3)
+    } else if (element === $(".fiveXfive")[0]){
+        game.newGame(5);
+    } else if (element === $(".start")[0]){
+        game.startGame();
+    }
+
+
+    console.log("pointer tapped x:" + x + " y: " + y,element);
 }
 
 function Game() {
