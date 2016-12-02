@@ -40,7 +40,6 @@ function setupGame() {
 /**
  * Click handler for all cell objects
  */
-
 function handleCellClick() {
     if (!game.inPlay) return;
     var cell = game.getGameBoard().getCell(this);
@@ -296,9 +295,6 @@ function Game() {
     /**
      * Start button pressed. Only works if the game is in an unstarted state
      */
-
-
-
     this.startGame = function () {
         if (self.clearBoard) {
             setPlayer(0);
@@ -359,7 +355,6 @@ function Game() {
     /**
      * Reset the game
      */
-
     this.resetGame = function () {
         //setPlayer(0);
         //mGameBoard.resetBoard();
