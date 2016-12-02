@@ -195,7 +195,7 @@ function Game() {
 
         if (doWin(matchX,matchY)) return;
 
-        if (mMoves == mSize*mSize - 1) {
+        if (mMoves == mSize*mSize) {
             console.log("No Winner");
             $(".modal-title").text("No Winner");
             $('#modalWin').modal('show');
