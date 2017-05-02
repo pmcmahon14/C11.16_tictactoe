@@ -8,8 +8,8 @@ var Item = function(imgSrc, height, width, sensitivity) {
   img.style.height = height + 'px';     //you can changed the units from px if you so choose
   img.style.width = width + 'px';     //you can changed the units from px if you so choose
     img.style.zIndex = "200";
-    // img.style.height = height + '%';     //you can changed the units from px if you so choose
-    // img.style.width = width + '%';     //you can changed the units from px if you so choose
+    // image.style.height = height + '%';     //you can changed the units from px if you so choose
+    // image.style.width = width + '%';     //you can changed the units from px if you so choose
 
     img.style.pointerEvents = "none";
   item.position = [];
@@ -27,10 +27,10 @@ var Item = function(imgSrc, height, width, sensitivity) {
      img.style.top  = position[1]*sensitivity - img.height / 2 + 'px';
 
      //uncomment out if you want to utilize a rotaion factor to the image displayed
-     // img.style.transform = 'rotate(' + -rotation + 'rad)';
+     // image.style.transform = 'rotate(' + -rotation + 'rad)';
 
-     // img.style.webkitTransform = img.style.MozTransform = img.style.msTransform =
-     //      img.style.OTransform = img.style.transform;
+     // image.style.webkitTransform = image.style.MozTransform = image.style.msTransform =
+     //      image.style.OTransform = image.style.transform;
 
   };
 

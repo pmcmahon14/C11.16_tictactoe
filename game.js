@@ -29,8 +29,8 @@ function setupGame() {
 
     $(".start").click(game.startGame);
 
-    var imageSrc1 = 'img/cursor.png';
-    var imageSrc2 = 'img/cursor.png';
+    var imageSrc1 = 'image/cursor.png';
+    var imageSrc2 = 'image/cursor.png';
     initialize(imageSrc1,25,25,imageSrc2, 25, 25, 1.2 );
     var audio = {};
     audio["dataline"] = new Audio();
