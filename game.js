@@ -53,7 +53,6 @@ function handleCellClick() {
         audio["dataline"].src = "mp3/zg_btn_sm1.wav";  //audio file source
         audio["dataline"].play(); //audio file play
     }
-    //console.log("clicked");
 }
 /**
  * Leap motion events call this function
@@ -66,7 +65,6 @@ function pointerTapped(x,y) {
 
     //Call same function as the click handlers if pointed at a clickable element
     if (cell !== null) {
-        //console.log("pointer clicked cell",cell);
         handleCellClick.call(element);
     } else if (element === $(".reset")[0]){
         game.resetGame();
@@ -77,8 +75,6 @@ function pointerTapped(x,y) {
     } else if (element === $(".start")[0]){
         game.startGame();
     }
-
-    console.log("pointer tapped x:" + x + " y: " + y,element);
 }
 /**
  * Main game constructor. Sets up and resets the game board, checks for win conditions and handles the timer
@@ -150,7 +146,6 @@ function Game() {
      */
     function setPlayer(player) {
         mCurrentPlayer = player;
-        //console.log("current player is ",self.getCurrentPlayer());
         //Set the classes to show who the current player is
         if (player==0){
             $('.player1').addClass('highlightCurrentPlayer');
@@ -246,7 +241,6 @@ function Game() {
 
         //No winnner  if all moves have been made
         if (mMoves == mSize*mSize) {
-            console.log("No Winner");
             $(".modal-title").text("No Winner");
             $('#modalWin').modal('show');
             finishGame();
@@ -263,7 +257,6 @@ function Game() {
      */
     function doWin(matchX,matchO) {
         if (matchX == mSize) {
-            console.log("Player 1 wins");
             playerone = playerone + 1;
             document.querySelector('.wincount1').innerHTML = playerone;
             $(".modal-title").text("Player 1 Wins");
@@ -271,7 +264,6 @@ function Game() {
             finishGame();
             return true;
         } else if (matchO == mSize) {
-            console.log("Player 2 wins");
             playertwo = playertwo + 1;
             document.querySelector('.wincount2').innerHTML = playertwo;
             $(".modal-title").text("Player 2 Wins");
@@ -322,7 +314,6 @@ function Game() {
         startTime = Date.now();
         progressBar.css("width","0%");
         timerCount = 0;
-        //console.log("resetting timer");
     }
 
     /**
@@ -339,7 +330,6 @@ function Game() {
         }
 
         timer = setTimeout(updateProgress,100);
-        //console.log("progress count " + timerCount);
     }
 
     /**
