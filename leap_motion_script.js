@@ -81,14 +81,12 @@ var initialize = function(imgSrc1, width1, height1, imgSrc2, width2, height2, se
    * fill in with your own method
    */
    api.circle = function(){
-      //console.log('circle method called');
    }
    /*
    * method triggered when keytap gesture is called
    * fill in with your own method
    */
    api.keyTap = function(){
-      //console.log('keyTap method called');
        //pointerTapped(items[0].position[0],items[0].position[1]);
        //pointerTapped(items[1].position[0],items[1].position[1]);
    }
@@ -97,7 +95,6 @@ var initialize = function(imgSrc1, width1, height1, imgSrc2, width2, height2, se
    * fill in with your own method
    */
    api.screenTap = function(){
-     //console.log('screenTap method called');
        pointerTapped(items[0].position[0],items[0].position[1]);
        //pointerTapped(items[1].position[0],items[1].position[1]);
    }
@@ -106,7 +103,6 @@ var initialize = function(imgSrc1, width1, height1, imgSrc2, width2, height2, se
    * fill in with your own method
    */
    api.swipe = function(){
-      console.log('swipe method called');
    }
       frame.hands.forEach(function(hand, index) {
 
