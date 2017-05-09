@@ -62,16 +62,16 @@ var initialize = function(imgSrc1, width1, height1, imgSrc2, width2, height2, se
          frame.gestures.forEach(function(gesture){
          switch (gesture.type){
            case "circle":
-               api.circle ? api.circle() : console.log('no circle gesture function created');
+               api.circle ? api.circle() : ('no circle gesture function created');
                break;
            case "keyTap":
-               api.keyTap ? api.keyTap() : console.log('no key tap gesture function created');
+               api.keyTap ? api.keyTap() : ('no key tap gesture function created');
                break;
            case "screenTap":
-               api.screenTap ? api.screenTap() : console.log('no screen tap gesture function created');
+               api.screenTap ? api.screenTap() : ('no screen tap gesture function created');
                break;
            case "swipe":
-                api.swipe ? api.swipe() : console.log('no swipe gesture function created');
+                api.swipe ? api.swipe() : ('no swipe gesture function created');
                break;
          }
       });
